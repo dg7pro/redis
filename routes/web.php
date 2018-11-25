@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('verifyOTP','VerifyOTPController@showOTPVerificationPage');
+Route::post('verifyOTP','VerifyOTPController@verify')->name('verifyOTP');
+
+Route::group(['middleware'=>'VerifyEmail'],function (){
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+});
+
+
